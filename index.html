@@ -1,0 +1,320 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+
+<head>
+	<title>OnChainAIMoons | Get an On-Chain Moon on Arbitrum | AI Generated</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<style>
+		body,html {
+			margin:0;
+			padding:0;
+			background:#001F3F;
+			color:white;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark" style="padding-left:10px;padding-right:10px;">
+		<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+			<a class="btn btn-primary" href="javascript:;" onclick="enableMM();">Connect Wallet</a>
+		</div>
+		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="https://opensea.io/collection/onchainaimoons">OpenSea</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://arbiscan.io/address/0xba56b6224218a80315a02a6ea03fc7fd6ec42ebc">Arbiscan</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://twitter.com/OnChainAIMoons">Twitter</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container-lg">
+
+	<h1>Mint an OnChainAIMoon!</h1>
+	<p>These 10000 moons are 100% AI generated and fully on-chain. Mint with $ARB (1 ARB) or $ETH (0.005 ETH).</p>
+	<div id="res"></div>
+	
+	<input onkeyup="changePricing()" id="amount" type="number" value="5" /> 
+	<button class="btn btn-primary" onclick="mint(document.getElementById('amount').value);" id="mintEth">Mint (0.05 $ETH)</button>
+	<button class="btn btn-primary" onclick="mintArb(document.getElementById('amount').value);" id="mintArb">Mint (10 $ARB)</button>
+	<br />
+	<br />
+	<br />
+	
+	<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MDBweCIgaGVpZ2h0PSI1MDBweCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHZlcnNpb249IjEuMSI+PGc+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIHN0eWxlPSJmaWxsOiMwMDFGM0Y7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlOm5vbmU7Ii8+PHBhdHRlcm4gaWQ9IlBhdHRlcm4iIHg9IjAiIHk9IjAiIHdpZHRoPSIwLjUwIiBoZWlnaHQ9IjAuMzAiPjxwYXRoIHN0eWxlPSJmaWxsOiM3RkRCRkY7IiBjbGFzcz0ic3QwIiBkPSJNIDEyIDQ3IE0gNzYuNDUgMTA2LjMyIGMgMi4zMiAwIDQuMjEgLTEuODEgNC4yMSAtNC4wNSBjIDAgLTIuMjQgLTEuODkgLTQuMDUgLTQuMjEgLTQuMDUgYyAtMi4zMyAwIC00LjIxIDEuODEgLTQuMjEgNC4wNSBDIDcyLjI0IDEwNC41MSA3NC4xMyAxMDYuMzIgNzYuNDUgMTA2LjMyIHogTSA0My44NSA0Ni4wNCBjIDIuMjYgMCA0LjEgLTEuNzYgNC4xIC0zLjk0IGMgMCAtMi4xOCAtMS44MyAtMy45NCAtNC4xIC0zLjk0IHMgLTQuMSAxLjc2IC00LjEgMy45NCBDIDM5Ljc1IDQ0LjI3IDQxLjU4IDQ2LjA0IDQzLjg1IDQ2LjA0IHogTSAxMDYuODkgNDkuMDggYyAzLjQzIDAgNi4yIC0yLjY3IDYuMiAtNS45NyBjIDAgLTMuMyAtMi43OCAtNS45NyAtNi4yIC01Ljk3IGMgLTMuNDMgMCAtNi4yIDIuNjcgLTYuMiA1Ljk3IEMgMTAwLjY5IDQ2LjQxIDEwMy40NiA0OS4wOCAxMDYuODkgNDkuMDggeiBNIDE0MS4wMyA5OC44OCBjIDIuMTMgMCAzLjg2IC0xLjY2IDMuODYgLTMuNzEgYyAwIC0yLjA1IC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgLTIuMTMgMCAtMy44NiAxLjY2IC0zLjg2IDMuNzEgQyAxMzcuMTcgOTcuMjIgMTM4LjkgOTguODggMTQxLjAzIDk4Ljg4IHogTSAxMzcuNzQgMTQ4LjA5IGMgMi4xMyAwIDMuODYgLTEuNjYgMy44NiAtMy43MSBzIC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgMi4xMyAwIDMuODYgLTEuNjYgMy44NiAtMy43MSB6IE0gOTIuNzIgMTQxLjcgYyAwIC0zLjIxIC0yLjcxIC01LjgyIC02LjA1IC01LjgyIGMgLTMuMzQgMCAtNi4wNSAyLjYxIC02LjA1IDUuODIgYyAwIDMuMjIgMi43MSA1LjgyIDYuMDUgNS44MiBDIDkwLjAxIDE0Ny41MiA5Mi43MiAxNDQuOTEgOTIuNzIgMTQxLjcgeiBNIDcuOTQgMTYzLjgxIGMgMCAzLjU0IDIuOTggNi40IDYuNjUgNi40IGMgMy42NyAwIDYuNjUgLTIuODcgNi42NSAtNi40IGMgMCAtMy41NCAtMi45OCAtNi40IC02LjY1IC02LjQgQyAxMC45MSAxNTcuNDEgNy45NCAxNjAuMjcgNy45NCAxNjMuODEgeiBNIDE4OC4xNCAxODguNDEgYyAwIDMuMjUgMi43NCA1Ljg5IDYuMTIgNS44OSBjIDIuMTUgMCAzLjkgLTEuMyAzLjkgLTIuOSBjIDAgLTEuNiAtMS43NSAtMi45IC0zLjkgLTIuOSBjIC0yLjE2IDAgLTMuOSAxLjMgLTMuOSAyLjkgeiBNIDE4Ny43NCA4NC4wOCBjIDIuNTMgMCA0LjU4IC0xLjk3IDQuNTggLTQuNDEgYyAwIC0yLjQ0IC0yLjA1IC00LjQxIC00LjU4IC00LjQxIGMgLTIuNTMgMCAtNC41OCAxLjk3IC00LjU4IDQuNDEgeiBNIDIyMy40MSAyMy44NiBjIDIuMjIgMCA0LjAxIC0xLjczIDQuMDEgLTMuODYgYyAwIC0yLjEzIC0xLjggLTMuODYgLTQuMDEgLTMuODYgYyAtMi4yMiAwIC00LjAxIDEuNzMgLTQuMDEgMy44NiBDIDIxOS40IDIyLjEzIDIyMS4xOSAyMy44NiAyMjMuNDEgMjMuODYgeiBNIDIxOS4xNSA3Mi42MyBjIDMuNDIgMCA2LjIgLTIuNjcgNi4yIC01Ljk3IGMgMCAtMy4zIC0yLjc4IC01Ljk3IC02LjIgLTUuOTcgYyAtMy40MyAwIC02LjIgMi42NyAtNi4yIDUuOTcgQyAyMTIuOTUgNjkuOTYgMjE1LjcyIDcyLjYzIDIxOS4xNSA3Mi42MyB6IE0gMjIyLjI1IDkxLjE4IGMgLTIuNTMgMCAtNC41OCAxLjk3IC00LjU4IDQuNDEgYyAwIDIuNDMgMi4wNSA0LjQxIDQuNTggNC40MSBjIDIuNTMgMCA0LjU4IC0xLjk3IDQuNTggLTQuNDEgQyAyMjYuODMgOTMuMTYgMjI0Ljc4IDkxLjE4IDIyMi4yNSA5MS4xOCB6IE0gMjEyLjk1IDE1Ni4yMiBjIDIuMTMgMCAzLjg2IC0xLjY2IDMuODYgLTMuNzEgYyAwIC0yLjA1IC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgLTIuMTMgMCAtMy44NiAxLjY2IC0zLjg2IDMuNzEgQyAyMDkuMDkgMTU0LjU2IDIxMC44MiAxNTYuMjIgMjEyLjk1IDE1Ni4yMiIvPjwvcGF0dGVybj48cmVjdCBmaWxsPSJ1cmwoI1BhdHRlcm4pIiB3aWR0aD0iNTAwcHgiIGhlaWdodD0iNTAwcHgiIC8+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxMikiIHN0eWxlPSJzdHJva2U6I0E5QTlBOTtmaWxsLXJ1bGU6bm9uemVybztmaWxsOiNGMEU2OEM7ZmlsbC1vcGFjaXR5OjE7IiBkPSJNIDI0MS42Njc5NjkgMjMzLjMzMjAzMSBDIDI0MS42Njc5NjkgMTM0LjAyMzQzOCAzMDQuMDUwNzgxIDQ5LjA2NjQwNiAzOTEuNjY3OTY5IDE1LjQ0MTQwNiBDIDM2NS43NjU2MjUgNS41IDMzNy42OTE0MDYgMCAzMDguMzMyMDMxIDAgQyAxNzkuNjc1NzgxIDAgNzUgMTA0LjY3NTc4MSA3NSAyMzMuMzMyMDMxIEMgNzUgMzYxLjk5MjE4OCAxNzkuNjc1NzgxIDQ2Ni42Njc5NjkgMzA4LjMzMjAzMSA0NjYuNjY3OTY5IEMgMzM3LjY5MTQwNiA0NjYuNjY3OTY5IDM2NS43NjU2MjUgNDYxLjE2Nzk2OSAzOTEuNjY3OTY5IDQ1MS4yMjY1NjIgQyAzMDQuMDUwNzgxIDQxNy42MDE1NjIgMjQxLjY2Nzk2OSAzMzIuNjQwNjI1IDI0MS42Njc5NjkgMjMzLjMzMjAzMSBaIE0gMjQxLjY2Nzk2OSAyMzMuMzMyMDMxIi8+PC9nPjwvc3ZnPg==" />
+	<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MDBweCIgaGVpZ2h0PSI1MDBweCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIHZlcnNpb249IjEuMSI+PGc+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIHN0eWxlPSJmaWxsOiMzRDk5NzA7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlOm5vbmU7Ii8+PHBhdHRlcm4gaWQ9IlBhdHRlcm4iIHg9IjAiIHk9IjAiIHdpZHRoPSIwLjUwIiBoZWlnaHQ9IjAuMzAiPjxwYXRoIHN0eWxlPSJmaWxsOiNEREREREQ7IiBjbGFzcz0ic3QwIiBkPSJNIDEyIDQ3IE0gNzYuNDUgMTA2LjMyIGMgMi4zMiAwIDQuMjEgLTEuODEgNC4yMSAtNC4wNSBjIDAgLTIuMjQgLTEuODkgLTQuMDUgLTQuMjEgLTQuMDUgYyAtMi4zMyAwIC00LjIxIDEuODEgLTQuMjEgNC4wNSBDIDcyLjI0IDEwNC41MSA3NC4xMyAxMDYuMzIgNzYuNDUgMTA2LjMyIHogTSA0My44NSA0Ni4wNCBjIDIuMjYgMCA0LjEgLTEuNzYgNC4xIC0zLjk0IGMgMCAtMi4xOCAtMS44MyAtMy45NCAtNC4xIC0zLjk0IHMgLTQuMSAxLjc2IC00LjEgMy45NCBDIDM5Ljc1IDQ0LjI3IDQxLjU4IDQ2LjA0IDQzLjg1IDQ2LjA0IHogTSAxMDYuODkgNDkuMDggYyAzLjQzIDAgNi4yIC0yLjY3IDYuMiAtNS45NyBjIDAgLTMuMyAtMi43OCAtNS45NyAtNi4yIC01Ljk3IGMgLTMuNDMgMCAtNi4yIDIuNjcgLTYuMiA1Ljk3IEMgMTAwLjY5IDQ2LjQxIDEwMy40NiA0OS4wOCAxMDYuODkgNDkuMDggeiBNIDE0MS4wMyA5OC44OCBjIDIuMTMgMCAzLjg2IC0xLjY2IDMuODYgLTMuNzEgYyAwIC0yLjA1IC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgLTIuMTMgMCAtMy44NiAxLjY2IC0zLjg2IDMuNzEgQyAxMzcuMTcgOTcuMjIgMTM4LjkgOTguODggMTQxLjAzIDk4Ljg4IHogTSAxMzcuNzQgMTQ4LjA5IGMgMi4xMyAwIDMuODYgLTEuNjYgMy44NiAtMy43MSBzIC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgMi4xMyAwIDMuODYgLTEuNjYgMy44NiAtMy43MSB6IE0gOTIuNzIgMTQxLjcgYyAwIC0zLjIxIC0yLjcxIC01LjgyIC02LjA1IC01LjgyIGMgLTMuMzQgMCAtNi4wNSAyLjYxIC02LjA1IDUuODIgYyAwIDMuMjIgMi43MSA1LjgyIDYuMDUgNS44MiBDIDkwLjAxIDE0Ny41MiA5Mi43MiAxNDQuOTEgOTIuNzIgMTQxLjcgeiBNIDcuOTQgMTYzLjgxIGMgMCAzLjU0IDIuOTggNi40IDYuNjUgNi40IGMgMy42NyAwIDYuNjUgLTIuODcgNi42NSAtNi40IGMgMCAtMy41NCAtMi45OCAtNi40IC02LjY1IC02LjQgQyAxMC45MSAxNTcuNDEgNy45NCAxNjAuMjcgNy45NCAxNjMuODEgeiBNIDE4OC4xNCAxODguNDEgYyAwIDMuMjUgMi43NCA1Ljg5IDYuMTIgNS44OSBjIDIuMTUgMCAzLjkgLTEuMyAzLjkgLTIuOSBjIDAgLTEuNiAtMS43NSAtMi45IC0zLjkgLTIuOSBjIC0yLjE2IDAgLTMuOSAxLjMgLTMuOSAyLjkgeiBNIDE4Ny43NCA4NC4wOCBjIDIuNTMgMCA0LjU4IC0xLjk3IDQuNTggLTQuNDEgYyAwIC0yLjQ0IC0yLjA1IC00LjQxIC00LjU4IC00LjQxIGMgLTIuNTMgMCAtNC41OCAxLjk3IC00LjU4IDQuNDEgeiBNIDIyMy40MSAyMy44NiBjIDIuMjIgMCA0LjAxIC0xLjczIDQuMDEgLTMuODYgYyAwIC0yLjEzIC0xLjggLTMuODYgLTQuMDEgLTMuODYgYyAtMi4yMiAwIC00LjAxIDEuNzMgLTQuMDEgMy44NiBDIDIxOS40IDIyLjEzIDIyMS4xOSAyMy44NiAyMjMuNDEgMjMuODYgeiBNIDIxOS4xNSA3Mi42MyBjIDMuNDIgMCA2LjIgLTIuNjcgNi4yIC01Ljk3IGMgMCAtMy4zIC0yLjc4IC01Ljk3IC02LjIgLTUuOTcgYyAtMy40MyAwIC02LjIgMi42NyAtNi4yIDUuOTcgQyAyMTIuOTUgNjkuOTYgMjE1LjcyIDcyLjYzIDIxOS4xNSA3Mi42MyB6IE0gMjIyLjI1IDkxLjE4IGMgLTIuNTMgMCAtNC41OCAxLjk3IC00LjU4IDQuNDEgYyAwIDIuNDMgMi4wNSA0LjQxIDQuNTggNC40MSBjIDIuNTMgMCA0LjU4IC0xLjk3IDQuNTggLTQuNDEgQyAyMjYuODMgOTMuMTYgMjI0Ljc4IDkxLjE4IDIyMi4yNSA5MS4xOCB6IE0gMjEyLjk1IDE1Ni4yMiBjIDIuMTMgMCAzLjg2IC0xLjY2IDMuODYgLTMuNzEgYyAwIC0yLjA1IC0xLjczIC0zLjcxIC0zLjg2IC0zLjcxIGMgLTIuMTMgMCAtMy44NiAxLjY2IC0zLjg2IDMuNzEgQyAyMDkuMDkgMTU0LjU2IDIxMC44MiAxNTYuMjIgMjEyLjk1IDE1Ni4yMiIvPjwvcGF0dGVybj48cmVjdCBmaWxsPSJ1cmwoI1BhdHRlcm4pIiB3aWR0aD0iNTAwcHgiIGhlaWdodD0iNTAwcHgiIC8+PHBhdGggc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2U6I0ZGRDcwMDtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS1taXRlcmxpbWl0OjM7IiBkPSJNIDEwLjk5OTk2OSA2IEMgMTAuOTk5OTY5IDMuMjM4MzEzIDguNzYxNjg4IDEuMDAwMDMxIDYgMS4wMDAwMzEgQyAzLjIzODMxMyAxLjAwMDAzMSAxLjAwMDAzMSAzLjIzODMxMyAxLjAwMDAzMSA2IEMgMS4wMDAwMzEgOC43NjE2ODggMy4yMzgzMTMgMTAuOTk5OTY5IDYgMTAuOTk5OTY5IEMgOC43NjE2ODggMTAuOTk5OTY5IDEwLjk5OTk2OSA4Ljc2MTY4OCAxMC45OTk5NjkgNiBaIE0gMTAuOTk5OTY5IDYgIiB0cmFuc2Zvcm09Im1hdHJpeCg0MS42NjY2NjcsMCwwLDQxLjY2NjY2NywwLDApIi8+PC9nPjwvc3ZnPg==" />
+</div>
+	<script>
+		function changePricing() {
+			let n = document.getElementById('amount').value;
+			let ethPrice = n*0.005;
+			let arbPrice = n*1;
+			document.getElementById('mintEth').innerHTML = "Mint ("+ethPrice+" $ETH)";
+			document.getElementById('mintArb').innerHTML = "Mint ("+arbPrice+" $ARB)";
+		}
+		var adr = "";
+
+		const tokenContractAddress = "0xba56b6224218a80315A02a6EA03fC7fD6EC42EBc";
+		const tokenAddress = "0x912CE59144191C1204E64559FE8253a0e49E6548";
+		var network = 
+    {
+      "name": "Arbitrum One",
+      "key": "arbitrum",
+      "currency": "ETH",
+        "blockExplorerUrls": ['https://arbiscan.io'],
+        "rpcUrls": ['https://arb1.arbitrum.io/rpc'],
+      "chainId": 42161
+    };
+
+		const tokenABI = [{
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mintArb",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },];
+	const abi2 = [
+	{
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+	]
+		var web3 = new Web3();
+		
+		async function enableMM() {
+			if (window.ethereum) {
+				try {
+					await window.ethereum.request({ method: 'eth_requestAccounts' });
+  					web3 = new Web3(window.ethereum);
+
+					adr = window.ethereum.selectedAddress;
+					window.contract = await new web3.eth.Contract(tokenABI, tokenContractAddress);
+					window.contract2 = await new web3.eth.Contract(abi2, tokenAddress);
+					
+				} catch (error) {
+					console.log("error: ", error);
+					// User denied account access...
+				}
+			}
+			// Legacy dapp browsers...
+			else if (window.web3) {
+			}
+			// Non-dapp browsers...
+			else {
+				console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+			}
+		}
+		async function mint(amount) {
+			await enableMM(network);
+			await switchNetworks(network);
+			var value = web3.utils.numberToHex(web3.utils.toWei(""+(0.005*amount), "ether"));
+
+			const transactionParameters = {
+				value: value,
+				gas: web3.utils.toHex(700000+70000*amount),
+				maxPriorityFeePerGas: null,
+				maxFeePerGas: null,
+				to: tokenContractAddress,
+				from: window.ethereum.selectedAddress,
+				data: window.contract.methods
+					.mint(amount)
+					.encodeABI(),
+			};
+
+			try {
+				const txHash = await window.ethereum.request({
+					method: "eth_sendTransaction",
+					params: [transactionParameters]
+				});
+				document.getElementById('res').innerHTML = "Congratulations!<br /> Successfully minted<br /><br />Mint started, check it out here: <a href='" + network.blockExplorerUrls[0] + "/tx/" + txHash + "' target='_blank'>" + network.blockExplorerUrls[0] + "/tx/" + txHash + "</a><br />";
+			} catch (error) {
+				document.getElementById('res').innerHTML = "😥 Something went wrong: " + error.message;
+			}
+		}
+		var allancePassed = false;
+		var tx = "0x5315aa367ca2f859f6778566b00a4d5e658c4169f98544964bb2c2febaa52d3d";
+		async function checkAllowance() {
+			let res = await web3.eth.getTransactionReceipt(tx);
+			if (res && res.status == true) {
+				document.getElementById('res').innerHTML = "Now you can mint 😇";
+				allancePassed = true;
+			}
+		}
+		async function allowance(amount) {
+			await enableMM(network);
+			//await switchNetworks(network);
+			
+			const transactionParameters = {
+				value:null,
+				gas: web3.utils.toHex(1700000),
+				maxPriorityFeePerGas: null,
+				maxFeePerGas: null,
+				to: tokenAddress,
+				from: window.ethereum.selectedAddress,
+				data: window.contract2.methods
+					.approve(tokenContractAddress, amount)
+					.encodeABI(),
+			};
+
+			try {
+				const txHash = await window.ethereum.request({
+					method: "eth_sendTransaction",
+					params: [transactionParameters]
+				});
+				document.getElementById('res').innerHTML = "Waiting for 1/2 transactions: <a href='" + network.blockExplorerUrls[0] + "/tx/" + txHash + "' target='_blank'>" + network.blockExplorerUrls[0] + "/tx/" + txHash + "</a><br />";
+			} catch (error) {
+				document.getElementById('res').innerHTML = "😥 Something went wrong: " + error.message;
+			}
+		}
+		var mintingAmount = 0;
+		async function checkAllowances() {
+			await checkAllowance();
+			if (allancePassed == true) {
+				var value = web3.utils.numberToHex(web3.utils.toWei(""+(1*mintingAmount), "ether"));
+				const transactionParameters = {
+					gas: web3.utils.toHex(700000+70000*mintingAmount),
+					maxPriorityFeePerGas: null,
+					maxFeePerGas: null,
+					to: tokenContractAddress,
+					from: window.ethereum.selectedAddress,
+					data: window.contract.methods
+						.mintArb(mintingAmount)
+						.encodeABI(),
+				};
+
+				try {
+					const txHash = await window.ethereum.request({
+						method: "eth_sendTransaction",
+						params: [transactionParameters]
+					});
+					document.getElementById('res').innerHTML = "Congratulations!<br />Mint started, check it out here: <a href='" + network.blockExplorerUrls[0] + "/tx/" + txHash + "' target='_blank'>" + network.blockExplorerUrls[0] + "/tx/" + txHash + "</a><br />";
+				} catch (error) {
+					document.getElementById('res').innerHTML = "😥 Something went wrong: " + error.message;
+				}
+			}
+			else {
+				setTimeout(function() {
+					checkAllowances();
+				},1000);
+			}
+		}
+		async function mintArb(amount) {
+			alert('Just a note: You will need to approve the sending of '+amount+' $ARB first, then mint in a second transaction.');
+			await enableMM(network);
+			await switchNetworks(network);
+			mintingAmount = amount;
+			var value = web3.utils.numberToHex(web3.utils.toWei(""+(1*mintingAmount), "ether"));
+				
+			await allowance(value);
+			await checkAllowances();
+			
+		}
+		async function addToken() {
+			const tokenSymbol = 'TT';
+			const tokenDecimals = 18;
+			const tokenImage = 'http://placekitten.com/200/300';
+			
+			try {
+			const wasAdded = await ethereum.request({
+				method: 'wallet_watchAsset',
+				params: {
+				type: 'ERC20', // Initially only supports ERC20, but eventually more!
+				options: {
+					address: tokenContractAddress, // The address that the token is at.
+					symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+					decimals: tokenDecimals, // The number of decimals in the token
+					image: tokenImage, // A string url of the token logo
+				},
+				},
+			});
+			
+			
+			} catch (error) {
+			console.log(error);
+			}
+
+		}
+		async function switchNetworks(network) {
+			try {
+				await window.ethereum.request({
+					method: 'wallet_switchEthereumChain',
+					params: [{ chainId: "0x"+network.chainId.toString(16) }],
+				});
+			} catch (error) {
+				if (error.code === 4902) {
+					try {
+						await window.ethereum.request({
+							method: 'wallet_addEthereumChain',
+							params: [
+								{
+									chainId: "0x"+network.chainId.toString(16),
+									chainName: network.name,
+									nativeCurrency: {
+										symbol: network.currency,
+										decimals: 18,
+										name: network.currency
+									},
+									blockExplorerUrls: network.blockExplorerUrls,
+									rpcUrls: network.rpcUrls,
+								},
+							],
+						});
+					} catch (addError) {
+						console.error(addError);
+					}
+				}
+				console.error(error);
+			}
+		}
+		document.addEventListener("DOMContentLoaded", function() {
+			changePricing();
+		});
+	</script>
+</body>
+
+</html>
